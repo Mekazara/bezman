@@ -1,5 +1,27 @@
-{{ for product in products }}
-{{ product.name }}
-{{ product.image }}
-{{ product.price }}
-{{ endfor }}
+<table>
+    <tr>
+        <td>Image</td>
+        <td>Name</td>
+        <td>Model</td>
+        <td>Manufactured</td>
+        <td>Type</td>
+        <td>Gender</td>
+        <td>Size</td>
+        <td>Price</td>
+        <td>Buy</td>
+
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td><img src="{{product.image.url}}" width=150px, height=90px></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.product_model }}</td>
+        <td>{{ product.manufactured }}</td>
+        <td>{{ product.product_type }}</td>
+        <td>{{ product.gender }}</td>
+        <td>{{ product.size }}</td>
+        <td>{{ product.price }}</td>
+        <td><a href="{%url%}">Buy</a></td>
+    </tr>
+    {% endfor %}
+</table>
