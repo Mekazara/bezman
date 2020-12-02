@@ -1,12 +1,15 @@
 <table>
     <tr>
-        <td>Name</td>
+        <td>Product image</td>
+        <td>Product name</td>
+        <td>Date</td>
         <td>Status</td>
     </tr>
     {% for order in orders %}
     <tr>
+        <td><img src="{{order.product.image.url}}" width=150px, height=80px></td>
         <td>{{ order.product.name }}</td>
-        <td>{{ oreder.date_created }}</td>
+        <td>{{ order.date_created }}</td>
         <td>{{ order.status }}</td>
     </tr>
     {% endfor %}

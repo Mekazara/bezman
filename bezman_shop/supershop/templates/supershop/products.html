@@ -21,7 +21,7 @@
         <td>{{ product.gender }}</td>
         <td>{{ product.size }}</td>
         <td>{{ product.price }}</td>
-        <td><a href="{%url%}">Buy</a></td>
+        <td><a href="{%url 'ordercreate' product.id %}">Buy</a></td>
     </tr>
     {% endfor %}
 </table>
