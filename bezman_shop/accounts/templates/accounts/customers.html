@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        <td>Customer's name</td>
+        <td>E-mail</td>
+        <td>More info</td>
+    </tr>
+    {% for customer in customers %}
+    <tr>
+        <td>{{ customer.full_name }}</td>
+        <td>{{ customer.mail}}</td>
+        <td><a href="{%url 'getcustomer' customer.id %}">About customer</a></td>
+    </tr>
+    {% endfor %}
+</table>
