@@ -1,5 +1,5 @@
 from django.db import models
-
+from accounts.models import Customer
 
 class Product(models.Model):
     types = (('classic', 'classic'),
@@ -27,6 +27,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name + ' ' + self.product_model
 
+    class Meta:
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
 
 class Orders(models.Model):
     statuses = (
@@ -38,8 +41,11 @@ class Orders(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=statuses, default='New order')
+    customer_order = models.ForeignKey(Customer,on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.product.name + ' ' + self.status
 
-
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
