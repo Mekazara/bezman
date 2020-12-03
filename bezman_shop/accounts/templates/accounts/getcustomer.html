@@ -1,4 +1,4 @@
-<img src="{{ customer.image.url}}">
+<img src="{{ customer.image.url}}" width=200px height=200px>
 <br>
 {{ customer.full_name }}
 <br>
@@ -7,3 +7,17 @@
 {{ customer.phone }}
 <br>
 {{ customer.mail }}
+<br>
+<table>
+    <tr>
+        <th>Product name</th>
+        <th>Status</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.product.name }}</td>
+        <td>{{ order.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
