@@ -1,9 +1,8 @@
 from django.apps import AppConfig
 
 
-class SupershopConfig(AppConfig):
+class FacesetConfig(AppConfig):
     name = 'supershop'
+    verbose_name = 'Магазин'
 
-    class Meta:
 
-        verbose_name = 'Магазин'
