@@ -5,5 +5,5 @@ class OrderForm(ModelForm):
     class Meta:
         model = Orders
         fields = '__all__'
-        exclude = ('status',)
+        exclude = ['status', 'customer_order',]
 
