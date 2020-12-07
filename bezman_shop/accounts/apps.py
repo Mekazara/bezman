@@ -3,6 +3,5 @@ from django.apps import AppConfig
 
 class AccountsConfig(AppConfig):
     name = 'accounts'
+    verbose_name = 'Аккаунт'
 
-    class Meta:
-        verbose_name = 'Аккаунты'
