@@ -1,27 +1,31 @@
+{% extends 'supershop/base.html'%}
+{% block content %}
 <nav>
     Hello, {{ request.user }}
-    <a href="{%url 'logout' %}">Log out</a>
+    <a href="{%url 'logout' %}" class="logout">Log out</a>
 </nav>
 <form action="" method="GET">
     {{filter.form}}
     <input type="submit" name="Confirm">
 </form>
 
+<table class="table table-hover table-dark">
+    <thread>
+        <tr>
+            <td scope="col">Image</td>
+            <td scope="col">Name</td>
+            <td scope="col">Model</td>
+            <td scope="col">Manufactured</td>
+            <td scope="col">Type</td>
+            <td scope="col">Gender</td>
+            <td scope="col">Size</td>
+            <td scope="col">Price</td>
+            <td scope="col">Buy</td>
 
-<table>
-    <tr>
-        <td>Image</td>
-        <td>Name</td>
-        <td>Model</td>
-        <td>Manufactured</td>
-        <td>Type</td>
-        <td>Gender</td>
-        <td>Size</td>
-        <td>Price</td>
-        <td>Buy</td>
-
-    </tr>
-    {% for product in products %}
+        </tr>
+    </thread>
+    <tbody>
+        {% for product in products %}
     <tr>
         <td><img src="{{product.image.url}}" width=150px, height=90px></td>
         <td>{{ product.name }}</td>
@@ -34,4 +38,7 @@
         <td><a href="{%url 'ordercreate' product.id %}">Buy</a></td>
     </tr>
     {% endfor %}
+    </tbody>
+
 </table>
+{% endblock %}
