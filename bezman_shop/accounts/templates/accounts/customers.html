@@ -1,11 +1,13 @@
 <table>
     <tr>
+        <td>Image</td>
         <td>Customer's name</td>
         <td>E-mail</td>
         <td>More info</td>
     </tr>
     {% for customer in customers %}
     <tr>
+        <td><img src="{{ customer.image.url }}" width=200px height=120px></td>
         <td>{{ customer.full_name }}</td>
         <td>{{ customer.mail}}</td>
         <td><a href="{%url 'getcustomer' customer.id %}">About customer</a></td>
