@@ -1,0 +1,16 @@
+.logout {
+hover: white;
+}
+
+.headers{
+text-align: center;
+font-family: 'Nerko One', cursive;
+color: #668cff;
+}
+
+.items{
+text-align: center;
+margin: auto;
+padding: auto;
+color: #0040ff;
+}
