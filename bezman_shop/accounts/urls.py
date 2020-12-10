@@ -9,5 +9,9 @@ urlpatterns = [
     path('customer/<int:customer_id>/', getCustomer, name='getcustomer'),
     path('user-create/', createUser, name='user-create'),
     path('login/', auth, name='login'),
-    path('logout/', logout_page,name='logout')
+    path('logout/', logout_page, name='logout'),
+    path('string/', task1),
+    path('string2/', task2),
+    path('task/', task3)
+
 ]
