@@ -1,7 +1,41 @@
-<form action="" method="POST">
-    {% csrf_token %}
-    <input name="username" type="text">
-    <input name="password" type="text">
-    <input type="submit" name="Submit">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
 
-</form>
+</head>
+<body>
+<div class="sidenav">
+         <div class="login-main-text">
+            <h2>Application<br> Login Page</h2>
+            <p>Login or register from here to discover BEZMAN world.</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form method="POST" action="">
+                   {%csrf_token%}
+                  <div class="form-group">
+                     <label>User Name</label>
+                     <input type="text" name="username" class="form-control" placeholder="User Name">
+                  </div>
+                  <div class="form-group">
+                     <label>Password</label>
+                     <input type="password" name="password" class="form-control" placeholder="Password">
+                  </div>
+                  <input type="submit" class="btn btn-black" name="Submit">
+                  <a href="{% url 'user-create' %}" class="btn btn-secondary">Register</a>
+               </form>
+            </div>
+         </div>
+      </div>
+</body>
+</html>
