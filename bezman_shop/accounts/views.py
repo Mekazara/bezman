@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 
@@ -44,3 +45,45 @@ def auth(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
+
+def task1(request):
+    string = 'fhksklhka'
+    lst = []
+    for letter in string:
+        if letter not in lst:
+            lst.append(letter)
+        else:
+            continue
+    x = len(lst)
+    if x % 2 == 0:
+        return HttpResponse(['Chat with her!', string])
+    else:
+        return HttpResponse(['Ignore him', string])
+
+def task2(request):
+    string = 'gfgjhkhafjd'
+    if len(set(string)) % 2 == 0:
+        return HttpResponse(['Chat with her!', string])
+    else:
+        return HttpResponse(['Ignore him', string])
+
+def task3(request):
+    import random
+    n, h = 3, 7
+    list1 = []
+    list2 =[]
+    for i in range(n):
+        list1.append(random.randint(1, 2*h))
+    for x in list1:
+        if x > h:
+            list2.append(2)
+        elif x <= h:
+            list2.append(1)
+
+    return HttpResponse([list1, sum(list2)])
+
+
+
+
+
+
