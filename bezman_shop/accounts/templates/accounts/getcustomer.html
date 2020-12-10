@@ -1,3 +1,5 @@
+{% extends 'accounts/base1.html'%}
+{% block content %}
 <img src="{{ customer.image.url}}" width=200px height=200px>
 <br>
 {{ customer.full_name }}
@@ -8,16 +10,20 @@
 <br>
 {{ customer.mail }}
 <br>
-<table>
-    <tr>
-        <th>Product name</th>
-        <th>Status</th>
-    </tr>
+<table class="table table-hover table-dark">
+    <thread>
+        <tr>
+            <th scope="col">Product name</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thread>
+    <tbody>
     {% for order in orders %}
     <tr>
         <td>{{ order.product.name }}</td>
         <td>{{ order.status }}</td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
-
+{% endblock %}

@@ -1,16 +1,23 @@
-<table>
-    <tr>
-        <td>Image</td>
-        <td>Customer's name</td>
-        <td>E-mail</td>
-        <td>More info</td>
-    </tr>
+{% extends 'accounts/base1.html' %}
+{% block content %}
+<table class="table table-hover table-dark">
+    <thread>
+        <tr>
+            <td scope="col">Image</td>
+            <td scope="col">Customer's name</td>
+            <td scope="col">E-mail</td>
+            <td scope="col">More info</td>
+        </tr>
+    </thread>
+    <tbody>
     {% for customer in customers %}
     <tr>
-        <td><img src="{{ customer.image.url }}" width=200px height=120px></td>
+        <td scope="row"><img src="{{ customer.image.url }}" width=200px height=120px></td>
         <td>{{ customer.full_name }}</td>
         <td>{{ customer.mail}}</td>
         <td><a href="{%url 'getcustomer' customer.id %}">About customer</a></td>
     </tr>
     {% endfor %}
+    </tbody>
 </table>
+{% endblock %}
