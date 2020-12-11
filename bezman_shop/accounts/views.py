@@ -1,12 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
-
-
+from .decoratoradm import admin_only
 # Create your views here.
 
+@admin_only
 def customerList(request):
     customers = Customer.objects.all()
     context = {'customers': customers}
@@ -14,7 +15,10 @@ def customerList(request):
 
 
 def getCustomer(request, customer_id):
-    customer = Customer.objects.get(id=customer_id)
+    try:
+        customer = Customer.objects.get(id=customer_id)
+    except Customer.DoesNotExist:
+        return HttpResponse('Page status = 404')
     orders = customer.orders_set.all()
     context = {'customer': customer, 'orders': orders}
     return render(request, 'accounts/getcustomer.html', context)
@@ -25,8 +29,12 @@ def createUser(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('customers')
+            user = form.save()
+            group = Group.objects.get(name='bezgirl')
+            user.groups.add(group)
+            Customer.objects.create(user=user, phone=1, full_name=user.username)
+            user.save()
+            return redirect('/')
     context = {'form': form}
     return render(request, 'accounts/user-create.html', context)
 
@@ -45,6 +53,8 @@ def auth(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
+
+
 
 def task1(request):
     string = 'fhksklhka'
