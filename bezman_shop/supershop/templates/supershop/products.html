@@ -1,9 +1,6 @@
 {% extends 'supershop/base.html'%}
 {% block content %}
-<nav>
-    Hello, {{ request.user }}
-    <a href="{%url 'logout' %}" class="logout">Log out</a>
-</nav>
+
 <form action="" method="GET">
     {{filter.form}}
     <input type="submit" name="Confirm">
