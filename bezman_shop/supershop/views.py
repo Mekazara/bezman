@@ -1,8 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
+from django.contrib.auth.decorators import login_required
 from django_filters.filters import OrderingFilter
 from .filters import ProductFilter
+from .decorator import allowed_roles
 
 
 # Create your views here.
@@ -15,6 +18,7 @@ def productList(request):
     return render(request, 'supershop/products.html', context)
 
 
+@allowed_roles(allowed=['bezman'])
 def orderList(request):
     orders = Orders.objects.all()
     orders_count = orders.count()
@@ -33,7 +37,10 @@ def orderList(request):
 
 
 def orderCreate(request, product_id):
-    product = Product.objects.get(id=product_id)
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return HttpResponse('Page status = 404')
     customer = request.user
     form = OrderForm(initial={'product': product, 'customer_order': customer})
     if request.method == 'POST':
@@ -44,8 +51,12 @@ def orderCreate(request, product_id):
     context = {'form': form}
     return render(request, 'supershop/ordercreate.html', context)
 
+
 def orderUpdate(request, order_id):
-    order = Orders.objects.get(id=order_id)
+    try:
+        order = Orders.objects.get(id=order_id)
+    except Orders.DoesNotExist:
+        return HttpResponse('Page status = 404')
     form = OrderForm(instance=order)
     if request.method == 'POST':
         form = OrderForm(request.POST, instance=order)
@@ -56,3 +67,19 @@ def orderUpdate(request, order_id):
 
     return render(request, 'supershop/ordercreate.html', context)
 
+
+def orderDelete(request, order_id):
+    try:
+        order = Orders.objects.get(id=order_id)
+    except Orders.DoesNotExist:
+        return HttpResponse('Page status = 404')
+    form = OrderForm(instance=order)
+    context = {'order': order}
+    if request.method == 'POST':
+        if order.status == 'New order':
+            order.delete()
+            return HttpResponse('Deleted')
+        else:
+            return HttpResponse('Something wrong')
+
+    return render(request, 'supershop/order-delete.html', context)
