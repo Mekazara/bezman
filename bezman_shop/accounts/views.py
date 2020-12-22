@@ -15,7 +15,6 @@ def customerList(request):
     context = {'customers': customers}
     return render(request, 'accounts/customers.html', context)
 
-
 def getCustomer(request, customer_id):
     try:
         customer = Customer.objects.get(id=customer_id)
@@ -61,8 +60,9 @@ def userProfile(request):
     user = request.user.customer
     form = UserProfile(instance=user)
     if request.method == 'POST':
-        form = UserProfile(request.POST, instance=user)
-        form.save()
+        form = UserProfile(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
     context = {'form': form}
     return render(request, 'accounts/accounts.html', context)
 
